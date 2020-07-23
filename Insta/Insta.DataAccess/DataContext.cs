@@ -15,7 +15,7 @@ namespace Insta.DataAccess
 
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
-        {
+        {   
             Database.EnsureCreated();
         }
     }
