@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insta.Model", "Insta.Model\Insta.Model.csproj", "{F83F5227-3FC3-44E0-B128-E0A126F18953}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insta.DataAccess", "Insta.DataAccess\Insta.DataAccess.csproj", "{06B1A176-931B-4EE7-A628-9D173F2B2429}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F83F5227-3FC3-44E0-B128-E0A126F18953}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F83F5227-3FC3-44E0-B128-E0A126F18953}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F83F5227-3FC3-44E0-B128-E0A126F18953}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06B1A176-931B-4EE7-A628-9D173F2B2429}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06B1A176-931B-4EE7-A628-9D173F2B2429}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06B1A176-931B-4EE7-A628-9D173F2B2429}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06B1A176-931B-4EE7-A628-9D173F2B2429}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
