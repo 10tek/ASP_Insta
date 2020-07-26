@@ -29,7 +29,7 @@
 
 <div class="container">
     <div class="row cards">
-        @foreach (var item in Model.Reverse()) // Проход цикла в обратном порядке, чтобы последние посты рисовались выше
+        @foreach (var item in Model.Reverse()) 
         {
             <div class="col-sm-12 mb-4">
                 <div class="post-item card" style="width: 18rem;" id="@item.Id">
@@ -42,7 +42,7 @@
                     </div>
                     <div class="icon mt-2 ml-3">
                         <i class="like far fa-heart card-text" id="set-like"></i>
-                        <p class="like-count mb-3">Нравится: @item.Likes.Count</p>
+                        <p class="like-count mb-3">Likes: @item.Likes.Count</p>
                     </div>
                     <div class="text-left ml-3">
                         @foreach (var comment in item.Comments)
@@ -62,8 +62,8 @@
                     @if (item.UserId == ViewBag.UserId)
                     {
                         <div class="card-footer mt-3">
-                            <a class="mr-4" asp-action="Edit" asp-route-id="@item.Id">Изменить</a>
-                            <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                            <a class="mr-4" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                         </div>
                     }
                 </div>

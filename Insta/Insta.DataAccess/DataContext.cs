@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Insta.DataAccess
 {
-    public class DataContext : IdentityDbContext<User>
+    public class DataContext : IdentityDbContext
     {
         public DbSet<Post> Posts { get; set; }
         public DbSet<Comment> Comments { get; set; }
