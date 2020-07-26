@@ -1,0 +1,73 @@
+﻿@using Insta.Model
+@model IEnumerable<WebApp.Models.Post.PostIndexViewModel>
+
+<style>
+
+    .icon {
+        text-align: justify
+    }
+
+    .comment {
+        font-size: 10px;
+    }
+
+    .like-count {
+        font-size: 12px;
+        font-weight: bolder;
+    }
+
+    .like:hover {
+        color: red;
+    }
+
+    #comment {
+        border: none;
+        outline: none;
+    }
+</style>
+
+
+<div class="container">
+    <div class="row cards">
+        @foreach (var item in Model.Reverse()) // Проход цикла в обратном порядке, чтобы последние посты рисовались выше
+        {
+            <div class="col-sm-12 mb-4">
+                <div class="post-item card" style="width: 18rem;" id="@item.Id">
+                    <div class="card-body">
+                        <strong class="float-left">@item.User.Name</strong>
+                    </div>
+                    <img src="@item.PhotoPath" class="card-img-top">
+                    <div class="mt-4 ml-3">
+                        <p class="float-left">@item.Data</p>
+                    </div>
+                    <div class="icon mt-2 ml-3">
+                        <i class="like far fa-heart card-text" id="set-like"></i>
+                        <p class="like-count mb-3">Нравится: @item.Likes.Count</p>
+                    </div>
+                    <div class="text-left ml-3">
+                        @foreach (var comment in item.Comments)
+                        {
+                            <small><strong>@comment.Author:</strong> @comment.Text @comment.CreationDate.ToString("dd/MM/yyyy")</small><br />
+                        }
+                    </div>
+                    <div>
+                        <form class="form-inline" method="post">
+                            <div class="form-group mx-sm-3 mb-2">
+                                <label for="comment" class="sr-only">Commentary</label>
+                                <input type="text" class="form-control-sm" id="comment" placeholder="Ваш комментарий" name="Text">
+                                <button type="submit" class="btn btn-sm btn-outline-success createPost">Сохранить</button>
+                            </div>
+                        </form>
+                    </div>
+                    @if (item.UserId == ViewBag.UserId)
+                    {
+                        <div class="card-footer mt-3">
+                            <a class="mr-4" asp-action="Edit" asp-route-id="@item.Id">Изменить</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>

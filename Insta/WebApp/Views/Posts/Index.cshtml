@@ -1,53 +1,77 @@
-﻿@model IEnumerable<Insta.Model.Post>
+﻿@model IEnumerable<WebApp.Models.Post.PostIndexViewModel>
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<a asp-action="Create" asp-controller="Posts">Добавить пост</a>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Data)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhotoPath)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreationDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhotoPath)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreationDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+<div id="posts">
+
+</div>
+@section scripts
+{
+    <script>
+        function showPosts(e) {
+            $.ajax({
+                type: "GET",
+                url: "/Posts/GetPosts",
+                success: function(res) {
+                    $("#posts").html(res);
+                }
+            });
+        }
+
+        function onCreateCommentHandler(id) {
+            var text = document.querySelector('#comment').value;
+            var object = new Object();
+            object.Text = text;
+            object.PostId = id;
+
+            $.ajax({
+                type: "POST",
+                url: "/Comments/CreateComment",
+                data: { comment: object },
+                success: function(result) {
+                    showPosts();
+                },
+                error: function() {
+                    alert("Ошибочка");
+                }
+            });
+        };
+
+        function onLikeHandler(id) {
+
+            var object = new Object();
+            object.PostId = id;
+
+            $.ajax({
+                type: "POST",
+                url: "/Likes/AddLike",
+                data: { like: object },
+                success: function(result) {
+                    showPosts();
+                },
+                error: function() {
+                    alert("Ошибочка");
+                }
+            });
+        }
+
+        actionHandler = (e) => {
+            e.preventDefault();
+            if (e.target.classList.contains('like')) {
+                var parent = e.target.closest(".post-item");
+                onLikeHandler(parent.id);
+            } else if (e.target.classList.contains('createPost')) {
+                var parent = e.target.closest(".post-item");
+                onCreateCommentHandler(parent.id);
+            }
+        }
+
+        showPosts();
+        var cardRow = document.querySelector("#posts").addEventListener("click", actionHandler);
+    </script>
 }
-    </tbody>
-</table>

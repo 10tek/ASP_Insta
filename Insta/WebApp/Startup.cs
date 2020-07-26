@@ -36,7 +36,7 @@ namespace WebApp
             services.AddScoped<IUnitOfWork, EFUnitOfWork>();
 
             services.AddAutoMapper(typeof(Startup));
-
+            services.AddHttpContextAccessor();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
